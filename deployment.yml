@@ -8,7 +8,7 @@ metadata:
     app: assistant-backend
 spec:
     # Sua especificação diz que ele deve manter (ou tentar manter) três instâncias do nosso aplicativo em execução a qualquer momento
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
     # Ele saberá quais instâncias pertencem a ele procurando Pods marcados como assistant-simple
