@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+# //recurso do tipo deployment
+kind: Deployment
+# Atribuir um nome e uma tag ao aplicativo ao qual ele se relaciona
+metadata:
+  name: assistant-backend-deployment
+  labels:
+    app: assistant-backend
+spec:
+    # Sua especificação diz que ele deve manter (ou tentar manter) três instâncias do nosso aplicativo em execução a qualquer momento
+  replicas: 3
+  selector:
+    matchLabels:
+    # Ele saberá quais instâncias pertencem a ele procurando Pods marcados como assistant-simple
+      app: assistant-backend
+  template:
+    metadata:
+      labels:
+      # Sempre que a Implantação perceber que está com falta de Pods, ela gerará uma nova, usando a configuração do modelo
+        app: assistant-backend
+    spec:
+      containers:
+      # Esse Pod será marcado como assistant-backend
+      - name: assistant-backend-container
+        # Esse Pod terá um único contêiner, chamado assistant-simple-container, que executa a imagem que acabamos de criar (assistant-backend: 1.0)
+        image: us.icr.io/mycluster-free/chat-containers-20200617194009068
+        # Ele nunca tentará baixar a imagem do DockerHub (comportamento padrão). Em vez disso, ele procurará imagens locais
+        ports:
+        # Esse Pod expõe a porta 8080 em seu próprio endereço IP.
+          - containerPort: 8080
+          # secret pego com (kubectl get secrets), mesmo nivel de container
+      imagePullSecrets:
+        - name: default-us-icr-io  
+         # kubectl delete -f deployment.yaml 
+        # kubectl apply -f deployment.yaml 
