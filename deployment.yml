@@ -14,6 +14,6 @@ spec:
     spec:     # pod spec                  
       containers: 
       - name: lucca-chat-container
-        image: us.icr.io/luccaspace/lucca-chat-containers:lastest # image we pushed
+        image: us.icr.io/luccaspace/lucca-chat-container:lastest # image we pushed
         ports:
         - containerPort: 8080
