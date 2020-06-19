@@ -4,6 +4,9 @@ metadata:
   name: lucca-chat-container-deployment
 spec:
   replicas: 2
+  selector:
+      matchLabels:
+        app: lucca-chat-container-application
   template:
     metadata:
       labels: # labels to select/identify the deployment
