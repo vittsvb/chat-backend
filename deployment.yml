@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: node-web-app
+spec:
+ replicas: 2
+ selector:
+     matchLabels:
+       app: node-web-app
+ template:
+   metadata:
+     labels:
+       app: node-web-app
+   spec:
+     containers:
+     - name: node-web-app
+       image: us.icr.io/vilasbootcamp/node-web-app:latest
+       ports:
+         - containerPort: 8080
+       env:
+         - name: APIKEY
+           value: H-4hJWWqlpHvTkbsGj3If6XFbzzK_HdUXzDpOc0bTy8Z
+         - name: URL
+           value: https://api.us-south.assistant.watson.cloud.ibm.com/instances/d91d4441-bcdc-4ffd-8954-bafc3b284e38
+         - name: ASSISTANT_ID
+           value: 80dbfa31-51f5-4641-9849-3af9ffde5a5e
+       imagePullPolicy: Never
